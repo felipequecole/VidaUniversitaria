@@ -32,7 +32,7 @@ class Game{
         int onScreen;
         int AonScreen;
         int minDist;
-        int vel;
+        float vel;
         int special;
         std::string t_especial;
         std::string spontuacao;

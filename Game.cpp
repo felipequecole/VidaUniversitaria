@@ -25,8 +25,8 @@ Game::Game(){
     Fonte.loadFromFile("Resource/Fonts/breja.ttf");
     FonteSpecial.loadFromFile("Resource/Fonts/Oswald.ttf");
     FonteHUD.loadFromFile("Resource/Fonts/IndieFlower.ttf");
-    if(!Soundtrack.openFromFile("Resource/Sound/fundo.ogg")) std::cout << "Nao abriu o audio";
-    if(!Easter.openFromFile("Resource/Sound/Show.ogg")) std::cout << "Deu ruim";
+    if(!Soundtrack.openFromFile("Resource/Sound/fundo.ogg")) std::cerr << "Nao abriu o audio";
+    if(!Easter.openFromFile("Resource/Sound/Show.ogg")) std::cerr << "Deu ruim";
 
     hitbuffer.loadFromFile("Resource/Sound/hit.ogg");
     hitsound.setBuffer(hitbuffer);
@@ -129,7 +129,7 @@ Game::Game(){
             int x = (rand()%81)*10;
             Object[i].Sprite.setPosition(x,-20); //inicia em  um x aleatorio e fora da tela
             Object[i].naTela = false;
-            Object[i].vivo = true; //ele ainda não morreu
+            Object[i].vivo = true; //ele ainda nï¿½o morreu
             Object[i].evil = true;
     }
 
@@ -142,7 +142,7 @@ Game::Game(){
             Aliados[i].Sprite.setPosition(x,-20); //inicia em  um x aleatorio e fora da tela
             //Aliados[i].Sprite.setScale(30,30);
             Aliados[i].naTela = false;
-            Aliados[i].vivo = true; //ele ainda não morreu
+            Aliados[i].vivo = true; //ele ainda nï¿½o morreu
             Aliados[i].evil = false;
     }
 
@@ -322,7 +322,6 @@ void Game::renderMenu() {
         else sprintf(h3, "%d", zero);
     }
     else {
-        std::cout << "Entrou no else" << std::endl;
         sprintf(h1, "%d", zero);
         sprintf(h2, "%d", zero);
         sprintf(h3, "%d", zero);
@@ -443,7 +442,7 @@ bool Game::collision (bool &isEvil) {
 
 }
 
-void Game::logic() { //logica de "lançamento" dos inimigos
+void Game::logic() { //logica de "lanï¿½amento" dos inimigos
     bool isEvil;
     bool PodeSoltar = true;
     if (contador%11 == 0 && AonScreen < nALIADOS) AonScreen = 0;
@@ -453,13 +452,13 @@ void Game::logic() { //logica de "lançamento" dos inimigos
         for (int i = 0; i <= nINIMIGOS; i++) { //ele "chama" o proximo objeto para tela
             if (Object[i].Sprite.getPosition().y < minDist && Object[i].naTela)    {
                     PodeSoltar = false;
-                    //onScreen = (onScreen+1)%11; //se ele atinge essa posicao, outro começa a cair
+                    //onScreen = (onScreen+1)%11; //se ele atinge essa posicao, outro comeï¿½a a cair
                     //contador++;
             }
             //Object[onScreen].naTela = true;
         }
         if (PodeSoltar) {
-            onScreen = (onScreen+1)%11; //se ele atinge essa posicao, outro começa a cair
+            onScreen = (onScreen+1)%11; //se ele atinge essa posicao, outro comeï¿½a a cair
             contador++;
             Object[onScreen].naTela = true;
         }
@@ -467,7 +466,7 @@ void Game::logic() { //logica de "lançamento" dos inimigos
         for (int i = 0; i <= nINIMIGOS; i++) {
                  //movement.reset();
                  //movement.resume();
-            if (Object[i].naTela) { //só move quem está na tel
+            if (Object[i].naTela) { //sï¿½ move quem estï¿½ na tel
                         Object[i].Sprite.move(0,((3.0*vel)/(float)special));
             }
 
@@ -518,18 +517,18 @@ void Game::logic() { //logica de "lançamento" dos inimigos
             vel = 1.3;
             break;
         case 40:
-            minDist = 50;
+            minDist = 75;
             vel = 1.5;
             break;
         case 50:
-            minDist = 30;
-            vel = 2;
+            minDist = 50;
+            vel = 1.75;
+            break;
         }
 
         if (vidas <= 0) {
             bool ok;
             InsereRec(Highscore, get_score(), ok);
-            if (ok) std::cout << "inseriu" << std::endl;
             oversound.play();
             gameisover = true;
             pause = true;
@@ -591,7 +590,6 @@ void Game::run() {
                     Easter.play();
                     special = 2;
                     tespecial.resume();
-                    std::cout << tespecial.getElapsedTime().asSeconds() << std::endl;
                     //std::cout << tespecial.getElapsedTime().asSeconds() << std::endl;
                 }
                 else {
@@ -644,14 +642,14 @@ void Game::reset() { //reinicia o jogo (mantem ele infinito)
             int x = (rand()%81)*10;
             Object[i].Sprite.setPosition(x,-20); //inicia em  um x aleatorio e fora da tela
             Object[i].naTela = false;
-            Object[i].vivo = true; //ele ainda não morreu
+            Object[i].vivo = true; //ele ainda nï¿½o morreu
     }
 
     for (int i = 0; i < nALIADOS; i++) { //reinicia os buffs
         int x = (rand()%81) * 10;
         Aliados[i].Sprite.setPosition(x,-20); //inicia em  um x aleatorio e fora da tela
         Aliados[i].naTela = false;
-        Aliados[i].vivo = true; //ele ainda não morreu
+        Aliados[i].vivo = true; //ele ainda nï¿½o morreu
     }
 
 }
